@@ -10,6 +10,7 @@ except ModuleNotFoundError:
 from golem.core.tuning.optuna_tuner import OptunaTuner
 from golem.core.tuning.simultaneous import SimultaneousTuner
 from golem.core.tuning.tuner_interface import BaseTuner
+from golem.core.optimisers.opt_history_objects.opt_history import OptHistory
 from golem.utilities.data_structures import ensure_wrapped_in_sequence
 
 from fedot.core.constants import DEFAULT_TUNING_ITERATIONS_NUMBER
@@ -39,6 +40,7 @@ class TunerBuilder:
         self.eval_time_constraint = None
         self.additional_params = {}
         self.adapter = PipelineAdapter()
+        self.history = None
 
     def with_tuner(self, tuner: Type[BaseTuner]):
         self.tuner_class = tuner
@@ -95,6 +97,10 @@ class TunerBuilder:
         self.adapter = adapter
         return self
 
+    def with_history(self, history: OptHistory):
+        self.history = history
+        return self
+
     def with_additional_params(self, **parameters):
         self.additional_params.update(parameters)
         return self
@@ -122,5 +128,6 @@ class TunerBuilder:
                                  timeout=self.timeout,
                                  search_space=self.search_space,
                                  n_jobs=self.n_jobs,
+                                 history=self.history,
                                  **self.additional_params)
         return tuner

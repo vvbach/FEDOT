@@ -815,7 +815,7 @@ class PipelineSearchSpace(SearchSpace):
                     'sampling-scope': [0, 25],
                     'type': 'discrete'
                 },
-                'border_count': {
+                'max_bin': {
                     'hyperopt-dist': hp.uniformint,
                     'sampling-scope': [1, 65535],
                     'type': 'discrete'
@@ -857,7 +857,7 @@ class PipelineSearchSpace(SearchSpace):
                     'sampling-scope': [0, 25],
                     'type': 'discrete'
                 },
-                'border_count': {
+                'max_bin': {
                     'hyperopt-dist': hp.uniformint,
                     'sampling-scope': [1, 65535],
                     'type': 'discrete'

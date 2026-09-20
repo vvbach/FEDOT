@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 from golem.core.dag.graph_utils import graph_structure
+from golem.core.optimisers.opt_history_objects.generation import Generation
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import LabelEncoder
 
@@ -50,7 +51,7 @@ def test_api_predict_correct(task_type, metric_name):
     assert all(value >= 0 for value in metric.values())
     # composing and tuning was applied
     assert model.history is not None
-    assert model.history.tuning_result is not None
+    assert isinstance(model.history.tuning_result, Generation)
     assert is_predict_ignores_target(model.predict, model.train_data, 'features')
 
 
