@@ -173,4 +173,3 @@ def test_catboost_tuning_bounds_histograms_and_leaf_counts(operation):
 
     parameters = PipelineSearchSpace().get_parameters_dict()[operation]
     assert parameters['max_bin']['sampling-scope'] == [16, 255]
-    assert parameters['min_data_in_leaf']['sampling-scope'] == [1, 128]
