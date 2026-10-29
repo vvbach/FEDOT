@@ -796,14 +796,7 @@ class PipelineSearchSpace(SearchSpace):
                     'sampling-scope': [4, 10],
                     'type': 'discrete'
                 },
-                'min_data_in_leaf': {
-                    # exp(25) sampled billions of rows; keep trials meaningful.
-                    'hyperopt-dist': hp.uniformint,
-                    'sampling-scope': [1, 128],
-                    'type': 'discrete'
-                },
                 'max_bin': {
-                    # Thousands of borders inflate quantization memory on CPU.
                     'hyperopt-dist': hp.uniformint,
                     'sampling-scope': [16, 255],
                     'type': 'discrete'
@@ -833,11 +826,6 @@ class PipelineSearchSpace(SearchSpace):
                 'max_depth': {
                     'hyperopt-dist': hp.uniformint,
                     'sampling-scope': [4, 10],
-                    'type': 'discrete'
-                },
-                'min_data_in_leaf': {
-                    'hyperopt-dist': hp.uniformint,
-                    'sampling-scope': [1, 128],
                     'type': 'discrete'
                 },
                 'max_bin': {

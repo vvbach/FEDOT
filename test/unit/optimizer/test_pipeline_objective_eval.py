@@ -151,7 +151,7 @@ def test_pipeline_objective_evaluate_with_empty_datasource(classification_datase
         objective_eval(pipeline)
 
 
-def test_pipeline_objective_evaluate_with_time_constraint(classification_dataset):
+def test_pipeline_objective_evaluate_with_time_constraint(classification_dataset, pipeline_fit_error_reports):
     pipeline = sample_pipeline()
 
     data_producer = DataSourceSplitter(cv_folds=None).build(classification_dataset)
@@ -174,7 +174,8 @@ def test_pipeline_objective_evaluate_with_time_constraint(classification_dataset
 
 
 def test_pipeline_objective_evaluate_skips_pipeline_with_incompatible_branch_indices(classification_dataset,
-                                                                                     monkeypatch):
+                                                                                     monkeypatch,
+                                                                                     pipeline_fit_error_reports):
     pipeline = sample_pipeline()
     data_producer = DataSourceSplitter(cv_folds=None).build(classification_dataset)
     objective_eval = PipelineObjectiveEvaluate(MetricsObjective(ClassificationMetricsEnum.ROCAUC_penalty),
