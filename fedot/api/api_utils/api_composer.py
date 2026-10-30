@@ -114,11 +114,12 @@ class ApiComposer:
         memory_limited_search = False
 
         if self.params.get('initial_assumption') is None:
-            if available_operations is None:
-                available_operations = OperationsPreset(self.params.task, preset).filter_operations_by_preset(
+            candidate_operations = available_operations
+            if candidate_operations is None:
+                candidate_operations = OperationsPreset(self.params.task, preset).filter_operations_by_preset(
                     train_data.data_type)
-            safe_operations = memory_safe_operations(train_data, available_operations)
-            if safe_operations is not available_operations:
+            safe_operations = memory_safe_operations(train_data, candidate_operations)
+            if safe_operations is not candidate_operations:
                 memory_limited_search = True
                 self.params['available_operations'] = safe_operations
                 current_arity = self.params.get('max_arity')

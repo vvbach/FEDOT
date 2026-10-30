@@ -565,6 +565,7 @@ def apply_type_transformation(table: np.ndarray, col_type_ids: Sequence, log: Lo
 
 def convert_num_column_into_string_array(numerical_column: pd.Series) -> pd.Series:
     """ Convert pandas column into numpy one-dimensional array """
+    numerical_column = numerical_column.astype(object, copy=True)
     # convert only non-nans values
     true_nums = numerical_column[numerical_column.notna()]
     numerical_column[true_nums.index] = true_nums.astype(str, copy=False)

@@ -213,7 +213,7 @@ class LabelEncodingImplementation(DataOperationImplementation):
     @staticmethod
     def _stable_codes(column, classes: np.ndarray) -> np.ndarray:
         """Keep known codes fixed and map all unseen levels after the fitted ones."""
-        codes = pd.Categorical(column, categories=classes).codes.astype(np.int32, copy=False)
+        codes = pd.Categorical(column, categories=classes).codes.astype(np.int32, copy=True)
         codes[codes < 0] = len(classes)
         return codes
 

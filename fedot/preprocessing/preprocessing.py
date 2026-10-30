@@ -436,7 +436,8 @@ class DataPreprocessor(BasePreprocessor):
         self.log.debug(f'--- {encoder.__class__.__name__} was chosen as categorical encoder')
         self.log.debug('--- Fitting and transforming data')
         output_data = encoder.transform_for_fit(data)
-        output_data.predict = output_data.predict.astype(np.float32, copy=False)
+        output_dtype = np.float32 if isinstance(encoder, OneHotEncodingImplementation) else np.float64
+        output_data.predict = output_data.predict.astype(output_dtype, copy=False)
         data.features = output_data.predict
         data.encoded_idx = output_data.encoded_idx
         data.supplementary_data = output_data.supplementary_data
