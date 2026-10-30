@@ -127,7 +127,7 @@ def test_pipeline_objective_evaluate_with_cv_fold(classification_dataset):
     assert fitness.value is not None
 
 
-def test_pipeline_objective_evaluate_is_invalid_if_later_fold_fails():
+def test_pipeline_objective_evaluate_is_invalid_if_later_fold_fails(pipeline_fit_error_reports):
     pipeline = PipelineBuilder().add_node('logit').build()
     objective = Mock(is_multi_objective=False)
     objective.return_value = SingleObjFitness(1.0)
