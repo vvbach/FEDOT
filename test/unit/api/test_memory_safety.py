@@ -115,7 +115,7 @@ def test_auto_encoder_bounds_dense_allocation_and_reuses_fitted_encoder(monkeypa
     train = preprocessor._apply_categorical_encoding(data, 'table')
     assert isinstance(preprocessor.features_encoders['table'], LabelEncodingImplementation)
     assert train.features.shape == (20, 2)
-    assert train.features.dtype == np.float32
+    assert train.features.dtype == np.float64
 
     test = preprocessor._apply_categorical_encoding(_categorical_data(), 'table')
     np.testing.assert_array_equal(test.features, train.features)
